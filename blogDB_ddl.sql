@@ -13,15 +13,15 @@ SELECT * FROM BlogPost;
 the DDL scripts to create the database tables: */
 CREATE TABLE Author (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL
+    name VARCHAR(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE BlogPost (
     id INT PRIMARY KEY AUTO_INCREMENT,
     author_id INT NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    word_count INT,
-    views INT,
+    title VARCHAR(255) NOT NULL,
+    word_count INT NOT NULL,
+    views INT NOT NULL,
     FOREIGN KEY (author_id) REFERENCES Author(id)
 );
 
@@ -33,10 +33,10 @@ INSERT INTO Author (name) VALUES
 ('Gemma Alcocer');
 
 INSERT INTO BlogPost (author_id, title, word_count, views) VALUES
-(1, 'Best Paint Colors', 814, 14),
-(2, 'Small Space Decorating Tips', 1146, 221),
-(1, 'Hot Accessories', 986, 105),
-(1, 'Mixing Textures', 765, 22),
-(2, 'Kitchen Refresh', 1242, 307),
-(1, 'Homemade Art Hacks', 1002, 193),
-(3, 'Refinishing Wood Floors', 1571, 7542);
+(1, 'Best Paint Colors', 814, 14 (SELECT id FROM Author WHERE name = "María Charlotte")),
+(2, 'Small Space Decorating Tips', 1146, 221, (SELECT id FROM Author WHERE name = "Juan Pérez")),
+(1, 'Hot Accessories', 986, 105, (SELECT id FROM Author WHERE name = ""María Charlotte")),
+(1, 'Mixing Textures', 765, 22, (SELECT id FROM Author WHERE name = "María Charlotte")),
+(2, 'Kitchen Refresh', 1242, 307, (SELECT id FROM Author WHERE name = "Juan Pérez")),
+(1, 'Homemade Art Hacks', 1002, 193, (SELECT id FROM Author WHERE name = "María Charlotte")),
+(3, 'Refinishing Wood Floors', 1571, 7542, (SELECT id FROM Author WHERE name = "Gemma Alcocer"));

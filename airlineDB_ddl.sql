@@ -17,13 +17,13 @@ CREATE TABLE Customer (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     status ENUM('Gold', 'Silver', 'None') NOT NULL,
-    total_mileage INT
+    total_mileage INT NOT NULL
 );
 
 CREATE TABLE Aircraft (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    total_seats INT
+    total_seats INT NOT NULL
 );
 
 CREATE TABLE Flight (
@@ -36,8 +36,8 @@ CREATE TABLE Flight (
 
 CREATE TABLE Booking (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT NOT NULL,
-    flight_id INT NOT NULL,
+    customer_id INT,
+    flight_id INT,
     FOREIGN KEY (customer_id) REFERENCES Customer(id),
     FOREIGN KEY (flight_id) REFERENCES Flight(id)
 );
